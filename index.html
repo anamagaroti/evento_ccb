@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Festa da Igreja — Evento Especial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="cross-icon">✝</div>
+  <p class="hero-label">Comunidade em festa</p>
+  <h1>Festa da<br/><span>Igreja</span></h1>
+  <p class="hero-sub">Um dia especial de comunhão, alegria e celebração juntos. Venha participar!</p>
+  <!-- ✏️ EDITE: data, horário e local do evento -->
+  <div class="hero-date">
+    📅 &nbsp;Sábado, 19 de Abril de 2025 &nbsp;·&nbsp; 14h &nbsp;·&nbsp; Salão da Igreja
+  </div>
+</div>
+
+<!-- ===== FORMULÁRIO (recolhível, logo após o hero) ===== -->
+<div class="form-toggle-wrap">
+  <button class="btn-toggle-form" id="btnToggle" onclick="toggleForm()">
+    ✝ Confirmar Presença &nbsp;<i class="arrow">▼</i>
+  </button>
+</div>
+
+<div class="form-collapsible" id="formCollapsible">
+  <section style="padding-top: 32px;">
+    <p class="section-label">Confirme sua presença</p>
+    <h2 class="section-title">Formulário de Confirmação</h2>
+
+    <div class="form-section">
+      <form id="formEvento" onsubmit="enviarFormulario(event)">
+
+        <div class="form-group">
+          <label for="nome">Seu nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Ex: Maria Silva" required />
+        </div>
+
+        <div class="form-group">
+          <label>Você vai estar presente?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="presenca" value="Sim, vou estar presente!" required/>
+              <span class="radio-box"></span>
+              ✅ Sim, estarei lá!
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="presenca" value="Não vou conseguir ir" />
+              <span class="radio-box"></span>
+              ❌ Não vou conseguir
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="presenca" value="Talvez, ainda não sei" />
+              <span class="radio-box"></span>
+              🤔 Talvez
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sugestao">Sugestão para o evento <span style="opacity:0.5;text-transform:none;letter-spacing:0">(opcional)</span></label>
+          <textarea id="sugestao" name="sugestao" placeholder="Alguma brincadeira, música ou ideia que você gostaria de sugerir..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Confirmar Presença ✝</button>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        🎉 <strong>Obrigado pela confirmação!</strong><br/>
+        Sua resposta foi registrada. Nos vemos no evento!<br/>
+        <span style="font-size:0.85rem; opacity:0.7; margin-top:8px; display:block;">Que Deus abençoe você e sua família 🙏</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PROGRAMAÇÃO ===== -->
+<section>
+  <p class="section-label">O que vai rolar</p>
+  <h2 class="section-title">Programação do Dia</h2>
+
+  <div class="grid-2">
+
+    <!-- ✏️ EDITE: brincadeiras -->
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Brincadeiras</h3>
+      <ul>
+        <li>Gincana em equipes</li>
+        <li>Cabo de guerra</li>
+        <li>Corrida do ovo</li>
+        <li>Adivinha a música</li>
+      </ul>
+    </div>
+
+    <!-- ✏️ EDITE: hinos/músicas -->
+    <div class="card">
+      <div class="card-icon">🎵</div>
+      <h3>Hinos & Louvor</h3>
+      <ul>
+        <li>Grande é o Senhor</li>
+        <li>Deus é mais que suficiente</li>
+        <li>Quão grande és Tu</li>
+        <li>Reckless Love (versão PT)</li>
+      </ul>
+    </div>
+
+    <!-- ✏️ EDITE: comidas -->
+    <div class="card">
+      <div class="card-icon">🍽️</div>
+      <h3>Cardápio</h3>
+      <ul>
+        <li>Churrasco</li>
+        <li>Salada de maionese</li>
+        <li>Pão de alho</li>
+        <li>Refrigerante e suco</li>
+        <li>Bolo de festa</li>
+      </ul>
+    </div>
+
+    <!-- ✏️ EDITE: horários ou outros itens -->
+    <div class="card">
+      <div class="card-icon">🕐</div>
+      <h3>Horários</h3>
+      <ul>
+        <li>14h — Abertura e boas-vindas</li>
+        <li>14h30 — Louvor coletivo</li>
+        <li>15h30 — Brincadeiras</li>
+        <li>17h — Jantar</li>
+        <li>18h30 — Encerramento</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== DOAÇÕES ===== -->
+<section>
+  <p class="section-label">Contribua com o evento</p>
+  <h2 class="section-title">Arrecadação</h2>
+
+  <div class="donations-section">
+
+    <!-- ✏️ EDITE: sua chave pix -->
+    <div class="pix-row">
+      <span class="pix-label">PIX</span>
+      <span class="pix-key" title="Clique para copiar" onclick="copiarPix(this)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa899f8f9495979fba9f979b9396d4999597">[email&#160;protected]</a></span>
+      <span class="copy-hint">clique para copiar</span>
+    </div>
+
+    <!-- ✏️ EDITE: valor arrecadado e meta -->
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span>Arrecadado até agora</span>
+        <div>
+          <span class="valor-atual">R$ 320,00</span>
+          <span class="valor-meta"> / R$ 600,00</span>
+        </div>
+      </div>
+      <div class="progress-bar-bg">
+        <!-- ✏️ EDITE: width = (arrecadado / meta) * 100 % -->
+        <div class="progress-bar-fill" style="width: 53%"></div>
+      </div>
+      <p class="progress-percent">53% da meta atingida · Última atualização: 20/03/2025</p>
+    </div>
+
+    <!-- ✏️ EDITE: itens e custos estimados -->
+    <p style="font-size:0.8rem; color:rgba(250,246,238,0.45); margin-bottom:12px; letter-spacing:0.1em; text-transform:uppercase;">Custo estimado por item</p>
+    <div class="itens-custo">
+      <div class="item-custo"><span>🥩 Churrasco</span><span>R$ 200</span></div>
+      <div class="item-custo"><span>🎂 Bolo</span><span>R$ 80</span></div>
+      <div class="item-custo"><span>🥤 Bebidas</span><span>R$ 100</span></div>
+      <div class="item-custo"><span>🍞 Pão de alho</span><span>R$ 40</span></div>
+      <div class="item-custo"><span>🎉 Decoração</span><span>R$ 80</span></div>
+      <div class="item-custo"><span>🧻 Descartáveis</span><span>R$ 50</span></div>
+      <div class="item-custo"><span>🥗 Salada</span><span>R$ 50</span></div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="divider"></div>
+  <!-- ✏️ EDITE: nome da igreja -->
+  Igreja Batista da Graça &nbsp;·&nbsp; Feito com carinho para nossa comunidade
+</footer>
+
+<script>
+  /* ===== TOGGLE FORMULÁRIO ===== */
+  function toggleForm() {
+    const collapsible = document.getElementById('formCollapsible');
+    const btn = document.getElementById('btnToggle');
+    collapsible.classList.toggle('open');
+    btn.classList.toggle('open');
+    if (collapsible.classList.contains('open')) {
+      setTimeout(() => collapsible.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+  }
+
+  /* ===== COPIAR PIX ===== */
+  function copiarPix(el) {
+    navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+      const original = el.textContent;
+      el.textContent = '✓ Copiado!';
+      setTimeout(() => el.textContent = original, 2000);
+    });
+  }
+
+  /* ===== ENVIAR FORMULÁRIO (Google Forms) ===== */
+  function enviarFormulario(e) {
+    e.preventDefault();
+    const form = document.getElementById('formEvento');
+    const nome = document.getElementById('nome').value.trim();
+    const presenca = form.querySelector('input[name="presenca"]:checked')?.value;
+    const sugestao = document.getElementById('sugestao').value.trim();
+
+    if (!presenca) {
+      alert('Por favor, informe se você vai estar presente.');
+      return;
+    }
+
+    /*
+    ====================================================
+    ✏️ COMO CONECTAR AO GOOGLE FORMS:
+
+    1. Crie um formulário em forms.google.com com os campos:
+       - Nome (resposta curta)
+       - Presença (múltipla escolha)
+       - Sugestão (parágrafo)
+
+    2. Clique em ⋮ > "Obter link pré-preenchido", preencha
+       e copie a URL. Ela vai ter os parâmetros como:
+       entry.XXXXXXXXX=
+
+    3. Substitua a URL abaixo pela URL do SEU formulário
+       e ajuste os entry.XXXXXXXXX com os IDs corretos.
+
+    EXEMPLO:
+    const FORM_URL = 'https://docs.google.com/forms/d/e/SEU_ID/formResponse';
+    const params = new URLSearchParams({
+      'entry.123456789': nome,
+      'entry.987654321': presenca,
+      'entry.111222333': sugestao,
+    });
+    ====================================================
+    */
+
+    // --- SIMULAÇÃO (remova e substitua pelo código acima quando tiver a URL) ---
+    console.log({ nome, presenca, sugestao });
+
+    // Esconde o form, mostra sucesso
+    document.getElementById('formEvento').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  }
+</script>
+</body>
+</html>
