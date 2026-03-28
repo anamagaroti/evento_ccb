@@ -11,20 +11,19 @@
 
 <!-- ===== HERO ===== -->
 <div class="hero">
-  <div class="cross-icon">✝</div>
-  <p class="hero-label">Comunidade em festa</p>
-  <h1>Festa da<br/><span>Igreja</span></h1>
+  <p class="hero-label">EVENTO CCB</p>
+  <h1><span>Luz</span> do mundo<br/>e <span>sal</span> da terra</h1>
   <p class="hero-sub">Um dia especial de comunhão, alegria e celebração juntos. Venha participar!</p>
   <!-- ✏️ EDITE: data, horário e local do evento -->
   <div class="hero-date">
-    📅 &nbsp;Sábado, 19 de Abril de 2025 &nbsp;·&nbsp; 14h &nbsp;·&nbsp; Salão da Igreja
+    📅 &nbsp;Sábado, 25 de Abril de 2026 &nbsp;·&nbsp; 15h &nbsp;·&nbsp; ESCOLHENDO LOCAL
   </div>
 </div>
 
 <!-- ===== FORMULÁRIO (recolhível, logo após o hero) ===== -->
 <div class="form-toggle-wrap">
   <button class="btn-toggle-form" id="btnToggle" onclick="toggleForm()">
-    ✝ Confirmar Presença &nbsp;<i class="arrow">▼</i>
+    Confirmar Presença &nbsp;<i class="arrow">▼</i>
   </button>
 </div>
 
@@ -67,7 +66,7 @@
           <textarea id="sugestao" name="sugestao" placeholder="Alguma brincadeira, música ou ideia que você gostaria de sugerir..."></textarea>
         </div>
 
-        <button type="submit" class="btn-submit">Confirmar Presença ✝</button>
+        <button type="submit" class="btn-submit">Confirmar Presença</button>
       </form>
 
       <div class="success-msg" id="successMsg">
@@ -122,20 +121,6 @@
         <li>Bolo de festa</li>
       </ul>
     </div>
-
-    <!-- ✏️ EDITE: horários ou outros itens -->
-    <div class="card">
-      <div class="card-icon">🕐</div>
-      <h3>Horários</h3>
-      <ul>
-        <li>14h — Abertura e boas-vindas</li>
-        <li>14h30 — Louvor coletivo</li>
-        <li>15h30 — Brincadeiras</li>
-        <li>17h — Jantar</li>
-        <li>18h30 — Encerramento</li>
-      </ul>
-    </div>
-
   </div>
 </section>
 
@@ -151,7 +136,7 @@
     <!-- ✏️ EDITE: sua chave pix -->
     <div class="pix-row">
       <span class="pix-label">PIX</span>
-      <span class="pix-key" title="Clique para copiar" onclick="copiarPix(this)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa899f8f9495979fba9f979b9396d4999597">[email&#160;protected]</a></span>
+      <span class="pix-key" title="Clique para copiar" onclick="copiarPix(this)"><a href="#pix-copiado" class="__cf_email__" data-cfemail="fa899f8f9495979fba9f979b9396d4999597">48500360828</a></span>
       <span class="copy-hint">clique para copiar</span>
     </div>
 
@@ -182,9 +167,11 @@
       <div class="item-custo"><span>🧻 Descartáveis</span><span>R$ 50</span></div>
       <div class="item-custo"><span>🥗 Salada</span><span>R$ 50</span></div>
     </div>
-
   </div>
+  <span id="pix-copiado"><p style="text-align:center; font-size:0.9rem; color:rgba(250,246,238,0.45);">Deus abençoe e recompense por contribuir! Lembrando que sua transferência será anonima. Caso tenha alguma dúvida, pode entrar em contato comigo. 🙌</p></span>
 </section>
+
+
 
 <footer>
   <div class="divider"></div>
@@ -208,8 +195,8 @@
   function copiarPix(el) {
     navigator.clipboard.writeText(el.textContent.trim()).then(() => {
       const original = el.textContent;
-      el.textContent = '✓ Copiado!';
-      setTimeout(() => el.textContent = original, 2000);
+      el.textContent = '✓ Deus abençoe!';
+      setTimeout(() => el.textContent = original, 20000);
     });
   }
 
@@ -225,39 +212,19 @@
       alert('Por favor, informe se você vai estar presente.');
       return;
     }
-
-    /*
-    ====================================================
-    ✏️ COMO CONECTAR AO GOOGLE FORMS:
-
-    1. Crie um formulário em forms.google.com com os campos:
-       - Nome (resposta curta)
-       - Presença (múltipla escolha)
-       - Sugestão (parágrafo)
-
-    2. Clique em ⋮ > "Obter link pré-preenchido", preencha
-       e copie a URL. Ela vai ter os parâmetros como:
-       entry.XXXXXXXXX=
-
-    3. Substitua a URL abaixo pela URL do SEU formulário
-       e ajuste os entry.XXXXXXXXX com os IDs corretos.
-
-    EXEMPLO:
-    const FORM_URL = 'https://docs.google.com/forms/d/e/SEU_ID/formResponse';
-    const params = new URLSearchParams({
-      'entry.123456789': nome,
-      'entry.987654321': presenca,
-      'entry.111222333': sugestao,
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaAs6JVwHCb3X7JYM0bV4HM_7MsaZuF9u3HDFfP8vYQfLfB0nwTe5Pc-LJltMirZgNSw/exec';
+ 
+    const params = new URLSearchParams({ nome, presenca, sugestao });
+ 
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
+    }).finally(() => {
+      document.getElementById('formEvento').style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
     });
-    ====================================================
-    */
-
-    // --- SIMULAÇÃO (remova e substitua pelo código acima quando tiver a URL) ---
-    console.log({ nome, presenca, sugestao });
-
-    // Esconde o form, mostra sucesso
-    document.getElementById('formEvento').style.display = 'none';
-    document.getElementById('successMsg').classList.add('show');
   }
 </script>
 </body>
