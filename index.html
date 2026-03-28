@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Festa da Igreja — Evento Especial</title>
+  <title>Evento - CCB</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -36,12 +36,12 @@
       <form id="formEvento" onsubmit="enviarFormulario(event)">
 
         <div class="form-group">
-          <label for="nome">Seu nome completo</label>
+          <label for="nome">Seu nome completo*</label>
           <input type="text" id="nome" name="nome" placeholder="Ex: Maria Silva" required />
         </div>
 
         <div class="form-group">
-          <label>Você vai estar presente?</label>
+          <label>Você vai estar presente?*</label>
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="presenca" value="Sim, vou estar presente!" required/>
@@ -60,13 +60,32 @@
             </label>
           </div>
         </div>
-
+        <div class="form-group">
+  <label>Toda a família?</label>
+  <div class="checkbox-row">
+    <input type="checkbox" id="familiaCheck" onchange="toggleQuantidade(this)" />
+    <span>Sim</span>
+  </div>
+  <div class="quantidade-wrap" id="qtdWrap" style="display:none; margin-top:12px;">
+    <label for="qtdPessoas">Quantas pessoas virão ao todo, incluindo você?*</label>
+    <select id="qtdPessoas" name="quantidade">
+      <option value="1">1 pessoa</option>
+      <option value="2">2 pessoas</option>
+      <option value="3">3 pessoas</option>
+      <option value="4">4 pessoas</option>
+      <option value="5">5 pessoas</option>
+      <option value="5">6 pessoas</option>
+      <option value="5">7 pessoas</option>
+      <option value="5">8 pessoas</option>
+    </select>
+  </div>
+</div>
         <div class="form-group">
           <label for="sugestao">Sugestão para o evento <span style="opacity:0.5;text-transform:none;letter-spacing:0">(opcional)</span></label>
           <textarea id="sugestao" name="sugestao" placeholder="Alguma brincadeira, música ou ideia que você gostaria de sugerir..."></textarea>
         </div>
 
-        <button type="submit" class="btn-submit">Confirmar Presença</button>
+        <button type="submit" class="btn-submit" id="btnSubmit">Confirmar Presença</button>
       </form>
 
       <div class="success-msg" id="successMsg">
@@ -85,43 +104,46 @@
 
   <div class="grid-2">
 
+     <div class="card">
+      <div class="card-icon">🍽️</div>
+      <h3>Cardápio</h3>
+      <ul>
+        <li>Churrasco (Carne, frango, linguiça e pão de alho)</li>
+        <li>Salada de maionese</li>
+        <li>Arroz branco</li>
+        <li>Salada verde</li>
+        <li>Vinagrete</li>
+        <li>Mandioca</li>
+        <li>Molhos (Alho e tomate)</li>
+        <li>Refrigerantes e suco de laranja</li>
+        <li>Sorvete picolé</li>
+      </ul>
+    </div>
+
     <!-- ✏️ EDITE: brincadeiras -->
     <div class="card">
       <div class="card-icon">🎯</div>
       <h3>Brincadeiras</h3>
       <ul>
-        <li>Gincana em equipes</li>
-        <li>Cabo de guerra</li>
-        <li>Corrida do ovo</li>
-        <li>Adivinha a música</li>
-      </ul>
-    </div>
-
-    <!-- ✏️ EDITE: hinos/músicas -->
-    <div class="card">
-      <div class="card-icon">🎵</div>
-      <h3>Hinos & Louvor</h3>
-      <ul>
-        <li>Grande é o Senhor</li>
-        <li>Deus é mais que suficiente</li>
-        <li>Quão grande és Tu</li>
-        <li>Reckless Love (versão PT)</li>
-      </ul>
-    </div>
-
-    <!-- ✏️ EDITE: comidas -->
-    <div class="card">
-      <div class="card-icon">🍽️</div>
-      <h3>Cardápio</h3>
-      <ul>
-        <li>Churrasco</li>
-        <li>Salada de maionese</li>
-        <li>Pão de alho</li>
-        <li>Refrigerante e suco</li>
-        <li>Bolo de festa</li>
+        <li>Perguntas e respostas (Biblica)</li>
+        <li>Caça ao tesouro (Com charadas baseadas na Bíblia)</li>
+        <li>Essa frase esta na Bíblia ou não?</li>
+        <li>Dança da cadeira</li>
+        <li>...</li>
       </ul>
     </div>
   </div>
+  <div class="card">
+      <div class="card-icon">🎵</div>
+      <h3>Hinos Avulsos</h3>
+      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0JecLe6qEhvxMJzH9fqYwp?utm_source=generator" width="100%" height="480" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <ul>
+        <li><a style="color: white;" href="https://open.spotify.com/playlist/0JecLe6qEhvxMJzH9fqYwp?si=5115ed24a150416f" target="_blank">Todos os Hinos avulsos - Spotify</a></li>
+        <li>
+            <a style="color: white;" href="https://www.youtube.com/playlist?list=PLXLYj_kB36UvWXmz4ONN5YDqYmpKOVF8y&jct=3Dl2CO8UV5nB6zIIOLMv-w" target="_blank">Todos os Hinos avulsos - YouTube</a>
+        </li>
+      </ul>
+    </div>
 </section>
 
 <div class="divider"></div>
@@ -136,7 +158,7 @@
     <!-- ✏️ EDITE: sua chave pix -->
     <div class="pix-row">
       <span class="pix-label">PIX</span>
-      <span class="pix-key" title="Clique para copiar" onclick="copiarPix(this)"><a href="#pix-copiado" class="__cf_email__" data-cfemail="fa899f8f9495979fba9f979b9396d4999597">48500360828</a></span>
+      <span class="pix-key" title="Clique para copiar" onclick="copiarPix(this)"><a style="color: white;" href="#pix-copiado" class="__cf_email__" data-cfemail="fa899f8f9495979fba9f979b9396d4999597">48500360828</a></span>
       <span class="copy-hint">clique para copiar</span>
     </div>
 
@@ -145,27 +167,25 @@
       <div class="progress-header">
         <span>Arrecadado até agora</span>
         <div>
-          <span class="valor-atual">R$ 320,00</span>
-          <span class="valor-meta"> / R$ 600,00</span>
+          <span class="valor-atual">R$ 0,00</span>
+          <span class="valor-meta"> / R$ ...</span>
         </div>
       </div>
       <div class="progress-bar-bg">
-        <!-- ✏️ EDITE: width = (arrecadado / meta) * 100 % -->
-        <div class="progress-bar-fill" style="width: 53%"></div>
+        <div class="progress-bar-fill" style="width: 0%"></div>
       </div>
-      <p class="progress-percent">53% da meta atingida · Última atualização: 20/03/2025</p>
+      <p class="progress-percent">Última atualização: 28/03/2025</p>
     </div>
 
     <!-- ✏️ EDITE: itens e custos estimados -->
     <p style="font-size:0.8rem; color:rgba(250,246,238,0.45); margin-bottom:12px; letter-spacing:0.1em; text-transform:uppercase;">Custo estimado por item</p>
     <div class="itens-custo">
-      <div class="item-custo"><span>🥩 Churrasco</span><span>R$ 200</span></div>
-      <div class="item-custo"><span>🎂 Bolo</span><span>R$ 80</span></div>
-      <div class="item-custo"><span>🥤 Bebidas</span><span>R$ 100</span></div>
-      <div class="item-custo"><span>🍞 Pão de alho</span><span>R$ 40</span></div>
-      <div class="item-custo"><span>🎉 Decoração</span><span>R$ 80</span></div>
-      <div class="item-custo"><span>🧻 Descartáveis</span><span>R$ 50</span></div>
-      <div class="item-custo"><span>🥗 Salada</span><span>R$ 50</span></div>
+      <div class="item-custo"><span>Churrasco</span><span>R$ ...</span></div>
+      <div class="item-custo"><span>Acompanhamentos</span><span>R$ ...</span></div>
+      <div class="item-custo"><span>Bebidas</span><span>R$ ...</span></div>
+      <div class="item-custo"><span>Decoração</span><span>R$ ...</span></div>
+      <div class="item-custo"><span>Local</span><span>R$ ...</span></div>
+      <div class="item-custo"><span>Lembrancinhas</span><span>R$ ...</span></div>
     </div>
   </div>
   <span id="pix-copiado"><p style="text-align:center; font-size:0.9rem; color:rgba(250,246,238,0.45);">Deus abençoe e recompense por contribuir! Lembrando que sua transferência será anonima. Caso tenha alguma dúvida, pode entrar em contato comigo. 🙌</p></span>
@@ -175,11 +195,11 @@
 
 <footer>
   <div class="divider"></div>
-  <!-- ✏️ EDITE: nome da igreja -->
   CCB &nbsp;·&nbsp; Feito com carinho para nossa comunidade
 </footer>
 
 <script>
+
   /* ===== TOGGLE FORMULÁRIO ===== */
   function toggleForm() {
     const collapsible = document.getElementById('formCollapsible');
@@ -190,6 +210,10 @@
       setTimeout(() => collapsible.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
     }
   }
+
+  function toggleQuantidade(el) {
+  document.getElementById('qtdWrap').style.display = el.checked ? 'block' : 'none';
+}
 
   /* ===== COPIAR PIX ===== */
   function copiarPix(el) {
@@ -207,14 +231,25 @@
     const nome = document.getElementById('nome').value.trim();
     const presenca = form.querySelector('input[name="presenca"]:checked')?.value;
     const sugestao = document.getElementById('sugestao').value.trim();
+    const familia = document.getElementById('familiaCheck').checked;
+const quantidade = familia ? document.getElementById('qtdPessoas').value : '1';
 
     if (!presenca) {
       alert('Por favor, informe se você vai estar presente.');
       return;
     }
+    if(familia && !quantidade) {
+      alert('Por favor, informe quantas pessoas virão ao todo.');
+      return;
+    }
+
+     const btn = document.getElementById('btnSubmit');
+  btn.disabled = true;
+  btn.textContent = '⏳ Enviando...';
+
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaAs6JVwHCb3X7JYM0bV4HM_7MsaZuF9u3HDFfP8vYQfLfB0nwTe5Pc-LJltMirZgNSw/exec';
  
-    const params = new URLSearchParams({ nome, presenca, sugestao });
+    const params = new URLSearchParams({ nome, presenca, sugestao, familia: familia ? 'Sim' : 'Não', quantidade });
  
     fetch(SCRIPT_URL, {
       method: 'POST',
