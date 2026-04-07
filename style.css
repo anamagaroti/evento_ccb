@@ -136,18 +136,34 @@
     /* ===== CARDS DE PROGRAMAÇÃO ===== */
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 40px;
       margin-bottom: 24px;
     }
 
-    .card {
+    .card-bloco{
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 16px;
       padding: 28px;
       transition: transform 0.2s, border-color 0.2s;
     }
+
+    .card {
+  display: flex;
+  flex-direction: column;        /* ← era grid, agora é flex coluna */
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card-blocos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* ← os 3 blocos lado a lado */
+  gap: 16px;
+  margin-top: 8px;
+}
 
     .card:hover {
       transform: translateY(-4px);
@@ -162,6 +178,16 @@
     .card h3 {
       font-family: 'Playfair Display', serif;
       font-size: 1.15rem;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+
+      border-bottom: #8B6914 1px solid;
+    }
+
+    .card h2 {
+      padding-top: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
       color: var(--gold-light);
       margin-bottom: 10px;
     }
@@ -493,7 +519,7 @@
     }
 
     .form-collapsible.open {
-      max-height: 800px;
+      max-height: 900px;
       opacity: 1;
     }
 
@@ -501,4 +527,18 @@
     @media (max-width: 600px) {
       .donations-section, .form-section { padding: 24px 20px; }
       .pix-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+      .card-blocos-container {
+    grid-template-columns: 1fr;
+  }
     }
+
+    @media (max-width: 860px) {
+  .card-blocos-container {
+    grid-template-columns: 1fr ;
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
