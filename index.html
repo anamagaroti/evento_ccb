@@ -377,7 +377,7 @@
 <script>
   /* ===== LISTA DE PRESENÇA ===== */
 const SHEET_ID = '1pf0JtTiyi-7U4Ynp0BaCoYU6HquhDsQ0kaA3tMeZKgY'; 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrXxq7oqx6TfCv69mvNcJsWqlW5-fVR6M1E9wcnmXLQvpwmSu2LCA16YjWsYihrd9HTQ/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTNSQpBpyMNDsavq6ozXuKiPQqDPw60M7h-JyrZ0V6czkj0TBkx4IVUWHnplwB-snvEg/exec'
 
 function iniciais(nome) {
   const p = nome.trim().split(' ');
@@ -423,15 +423,11 @@ function renderLista(dados) {
 function carregarLista() {
   document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Carregando...</div>';
   
-  fetch(SCRIPT_URL, { redirect: 'follow' })
-    .then(r => r.text())
-    .then(txt => {
-      const dados = JSON.parse(txt);
-      renderLista(dados);
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Não foi possível carregar a lista.</div>';
+  fetch('presenca.json')
+    .then(r => r.json())
+    .then(dados => renderLista(dados))
+    .catch(() => {
+      document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Arquivo presenca.json não encontrado.</div>';
     });
 }
 
