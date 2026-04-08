@@ -122,8 +122,6 @@
     </div>
   </div>
 
-  <button onclick="carregarLista()" style="display:inline-flex; align-items:center; gap:6px; background:none; border:1px solid rgba(201,168,76,0.4); border-radius:20px; padding:6px 16px; font-size:.78rem; color:var(--gold); cursor:pointer; margin-bottom:16px; transition:background .2s;">↻ Atualizar lista</button>
-
   <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.2); border-radius:14px; overflow:hidden;" id="lpBox">
     <div style="text-align:center; padding:32px; color:rgba(250,246,238,0.45);">Carregando confirmações...</div>
   </div>
@@ -384,7 +382,23 @@ function iniciais(nome) {
   return (p[0][0] + (p[1]?.[0] || '')).toUpperCase();
 }
 
+let dadosGlobais = [];
+let paginaAtual = 1;
+const ITENS_POR_PAGINA = 8;
+
+function iniciais(nome) {
+  const p = nome.trim().split(' ');
+  return (p[0][0] + (p[1]?.[0] || '')).toUpperCase();
+}
+
 function renderLista(dados) {
+  dadosGlobais = dados;
+  paginaAtual = 1;
+  renderPagina();
+}
+
+function renderPagina() {
+  const dados = dadosGlobais;
   const sim = dados.filter(d => d['presença'] === 'Sim, vou estar presente!');
   const talvez = dados.filter(d => d['presença'] === 'Talvez, ainda não sei');
   const nao = dados.filter(d => d['presença'] === 'Não vou conseguir ir');
@@ -395,7 +409,11 @@ function renderLista(dados) {
   document.getElementById('statTalvez').textContent = talvez.length;
 
   const ordem = [...sim, ...talvez, ...nao];
-  const rows = ordem.map(d => {
+  const totalPaginas = Math.ceil(ordem.length / ITENS_POR_PAGINA);
+  const inicio = (paginaAtual - 1) * ITENS_POR_PAGINA;
+  const fatia = ordem.slice(inicio, inicio + ITENS_POR_PAGINA);
+
+  const rows = fatia.map(d => {
     const isSim = d['presença'].includes('Sim');
     const isNao = d['presença'].includes('Não');
     const badge = isSim ? '✅ Confirmado' : isNao ? '❌ Não vai' : '🤔 Talvez';
@@ -412,13 +430,49 @@ function renderLista(dados) {
       </div>`;
   }).join('');
 
+  // Botões de paginação
+  const btnAnterior = paginaAtual > 1
+    ? `<button onclick="mudarPagina(${paginaAtual - 1})" style="background:none;border:1px solid rgba(201,168,76,0.4);border-radius:8px;padding:6px 14px;color:var(--gold);cursor:pointer;font-size:.82rem;">← Anterior</button>`
+    : `<button disabled style="background:none;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 14px;color:rgba(250,246,238,0.2);font-size:.82rem;cursor:default;">← Anterior</button>`;
+
+  const btnProximo = paginaAtual < totalPaginas
+    ? `<button onclick="mudarPagina(${paginaAtual + 1})" style="background:none;border:1px solid rgba(201,168,76,0.4);border-radius:8px;padding:6px 14px;color:var(--gold);cursor:pointer;font-size:.82rem;">Próximo →</button>`
+    : `<button disabled style="background:none;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 14px;color:rgba(250,246,238,0.2);font-size:.82rem;cursor:default;">Próximo →</button>`;
+
+  const paginacao = totalPaginas > 1 ? `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid rgba(201,168,76,0.15);">
+      ${btnAnterior}
+      <span style="font-size:.78rem;color:rgba(250,246,238,0.4);">Página ${paginaAtual} de ${totalPaginas}</span>
+      ${btnProximo}
+    </div>` : '';
+
   document.getElementById('lpBox').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:10px 20px;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(250,246,238,0.4);border-bottom:1px solid rgba(201,168,76,0.2);">
       <span>Nome</span><span>Presença</span><span>Qtd</span>
     </div>
     ${rows || '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Nenhuma resposta ainda.</div>'}
+    ${paginacao}
   `;
 }
+
+function mudarPagina(novaPagina) {
+  paginaAtual = novaPagina;
+  renderPagina();
+  document.getElementById('lista-presenca').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function carregarLista() {
+  document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Carregando...</div>';
+  
+  fetch('presenca.json')
+    .then(r => r.json())
+    .then(dados => renderLista(dados))
+    .catch(() => {
+      document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Arquivo presenca.json não encontrado.</div>';
+    });
+}
+
+carregarLista();
 
 function carregarLista() {
   document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Carregando...</div>';
