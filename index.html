@@ -80,9 +80,9 @@
       <option value="3">3 pessoas</option>
       <option value="4">4 pessoas</option>
       <option value="5">5 pessoas</option>
-      <option value="5">6 pessoas</option>
-      <option value="5">7 pessoas</option>
-      <option value="5">8 pessoas</option>
+      <option value="6">6 pessoas</option>
+      <option value="7">7 pessoas</option>
+      <option value="8">8 pessoas</option>
     </select>
   </div>
 </div>
@@ -377,6 +377,7 @@
 <script>
   /* ===== LISTA DE PRESENÇA ===== */
 const SHEET_ID = '1pf0JtTiyi-7U4Ynp0BaCoYU6HquhDsQ0kaA3tMeZKgY'; // ← veja instrução abaixo
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOPmd94HB4kG78j7GD3P_kMocHbYmvZ7oxsSFAQLQ493G2LMuuGDuXFrYSCNB9yUo4Kg/exec'
 
 function iniciais(nome) {
   const p = nome.trim().split(' ');
@@ -419,8 +420,6 @@ function renderLista(dados) {
   `;
 }
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMpUD5HHPvUUTbWOplgKl84Uk-D502p6Ol7jUrueIvT39uwIY4DkuWO2ZimFPmVyfMHQ/exec';
-
 function carregarLista() {
   document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Carregando...</div>';
   
@@ -431,6 +430,8 @@ function carregarLista() {
       document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Não foi possível carregar a lista.</div>';
     });
 }
+
+carregarLista();
 
   /* ===== TOGGLE FORMULÁRIO ===== */
   function toggleForm() {
@@ -479,8 +480,6 @@ const quantidade = familia ? document.getElementById('qtdPessoas').value : '1';
   btn.disabled = true;
   btn.textContent = '⏳ Enviando...';
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMpUD5HHPvUUTbWOplgKl84Uk-D502p6Ol7jUrueIvT39uwIY4DkuWO2ZimFPmVyfMHQ/exec';
- 
     const params = new URLSearchParams({ nome, presenca, sugestao, familia: familia ? 'Sim' : 'Não', quantidade });
  
     fetch(SCRIPT_URL, {
