@@ -376,8 +376,8 @@
 
 <script>
   /* ===== LISTA DE PRESENÇA ===== */
-const SHEET_ID = '1pf0JtTiyi-7U4Ynp0BaCoYU6HquhDsQ0kaA3tMeZKgY'; // ← veja instrução abaixo
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOPmd94HB4kG78j7GD3P_kMocHbYmvZ7oxsSFAQLQ493G2LMuuGDuXFrYSCNB9yUo4Kg/exec'
+const SHEET_ID = '1pf0JtTiyi-7U4Ynp0BaCoYU6HquhDsQ0kaA3tMeZKgY'; 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrXxq7oqx6TfCv69mvNcJsWqlW5-fVR6M1E9wcnmXLQvpwmSu2LCA16YjWsYihrd9HTQ/exec'
 
 function iniciais(nome) {
   const p = nome.trim().split(' ');
@@ -423,10 +423,14 @@ function renderLista(dados) {
 function carregarLista() {
   document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Carregando...</div>';
   
-  fetch(SCRIPT_URL)
-    .then(r => r.json())
-    .then(dados => renderLista(dados))
-    .catch(() => {
+  fetch(SCRIPT_URL, { redirect: 'follow' })
+    .then(r => r.text())
+    .then(txt => {
+      const dados = JSON.parse(txt);
+      renderLista(dados);
+    })
+    .catch(err => {
+      console.error(err);
       document.getElementById('lpBox').innerHTML = '<div style="padding:32px;text-align:center;color:rgba(250,246,238,0.4);">Não foi possível carregar a lista.</div>';
     });
 }
